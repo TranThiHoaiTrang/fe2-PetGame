@@ -17,7 +17,7 @@
     body {
         position: relative;
         background-image: url('bg-game.jpg');
-        height: 550px;
+        height: 580px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -68,45 +68,52 @@
         transform-origin: 50% 50%;
     }
 
-    .progress-table span{
-        color: white;
-        font-size: 20px;
+    .progress-table label {
+        padding-top: 15px;
+        color: indigo;
+        font-size: 22px;
         font-weight: 500;
+    }
+
+    .progress-pro{
+        display: flex;
     }
 
     .table-eat {
         position: absolute;
     }
-    .image-eat{
+
+    .image-eat {
         background-color: transparent;
         border: none;
         display: flex;
+    }
+    .image-eat span{
+        color: darkslategray;
+        font-weight: 700;
     }
 </style>
 
 <body>
     <div class="status">
         <div class="progress-table">
-            <div class="progress-one">
-                <svg class="progress-ring" width="65" height="50">
-                    <circle class="progress-ring__circle " id="circle-one" stroke="aquamarine" stroke-width="10" fill="white" r="15"
-                        cx="30" cy="20" />
-                </svg>
-                <span>Thức ăn</span>
+            <div class="progress-one progress-pro">
+                <progress-ring stroke="5" radius="30" progress="0" id="progressRing"></progress-ring>
+                <div class="lable">
+                    <label>Thức ăn</label>
+                </div>
             </div>
-            <div class="progress-two">
-                <svg class="progress-ring" width="65" height="50">
-                    <circle class="progress-ring__circle " id="circle-two" stroke="aquamarine" stroke-width="10" fill="white" r="15"
-                        cx="30" cy="20" />
-                </svg>
-                <span>Niềm Vui</span>
+            <div class="progress-two progress-pro">
+                <progress-ring2 stroke="5" radius="30" progress="0" id="progressRing2"></progress-ring2>
+                <div class="lable">
+                    <label>Niềm Vui</label>
+                </div>
             </div>
-            <div class="progress-three">
-                <svg class="progress-ring" width="65" height="50">
-                    <circle class="progress-ring__circle " id="circle-three" stroke="aquamarine" stroke-width="10" fill="white" r="15"
-                        cx="30" cy="20" />
-                </svg>
-                <span>Tắm Rửa</span>
+            <div class="progress-three progress-pro">
+                <progress-ring3 stroke="5" radius="30" progress="0" id="progressRing3"></progress-ring3>
+                <div class="lable">
+                    <label>Tắm rửa</label>
+                </div>
             </div>
         </div>
     </div>
@@ -145,7 +152,7 @@
         <img src="public/images/trong-removebg-preview.png" alt="" width="15%">
     </div>
 
-<script src="./public/js/vong1.js"></script>
+    <script src="./public/js/vong1.js"></script>
 </body>
 
 </html>

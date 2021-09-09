@@ -1,111 +1,296 @@
 // vòng 1 *******************************************
-var circle = document.querySelector('#circle-one');
-var radius = circle.r.baseVal.value;
-var circumference = radius * 2 * Math.PI;
+class ProgressRing extends HTMLElement {
+  constructor() {
+    super();
+    const stroke = this.getAttribute('stroke');
+    const radius = this.getAttribute('radius');
+    const normalizedRadius = radius - stroke * 2;
+    this._circumference = normalizedRadius * 2 * Math.PI;
 
-circle.style.strokeDasharray = `${circumference} ${circumference}`;
-circle.style.strokeDashoffset = `${circumference}`;
+    this._root = this.attachShadow({ mode: 'open' });
+    this._root.innerHTML = `
+                              <svg
+                                  height="${radius * 2}"
+                                  width="${radius * 2}"
+                              >
+                                  <circle
+                                  stroke="brown"
+                                  stroke-dasharray="${this._circumference} ${this._circumference}"
+                                  style="stroke-dashoffset:${this._circumference}"
+                                  stroke-width="${stroke}"
+                                  fill="bisque"
+                                  r="${normalizedRadius}"
+                                  cx="${radius}"
+                                  cy="${radius}"
+                                  />
+                              </svg>
 
-function setProgress(percent) {
-  const offset = circumference - percent / 100 * circumference;
-  circle.style.strokeDashoffset = offset;
-}
-const step = 20;
-const step3 = 30;
-const step2 = 10;
-let percent = 0;
-document.querySelector('#eat-one')
-  .addEventListener('click', e => {
-    percent = percent + step;
-    setProgress(percent);
+                              <style>
+                                  circle {
+                                  transition: stroke-dashoffset 0.35s;
+                                  transform: rotate(-90deg);
+                                  transform-origin: 50% 50%;
+                                  }
+                              </style>
+                              `;
+  } // end constructor
 
-    // nếu bằng hoặc lớn hơn 100 thì sẽ set lại percent là 0
-    // và đọi 500ms rồi cập nhập lại Progress(percent = 0);
-    if (percent >= 100) {
-      percent = 100;
-      setTimeout(() => { setProgress(percent); }, 0);
-    }
-  })
-  document.querySelector('#drink-mill')
-  .addEventListener('click', e => {
-    percent = percent + step2;
-    setProgress(percent);
-
-    // nếu bằng hoặc lớn hơn 100 thì sẽ set lại percent là 0
-    // và đọi 500ms rồi cập nhập lại Progress(percent = 0);
-    if (percent >= 100) {
-      percent = 100;
-      setTimeout(() => { setProgress(percent); }, 0);
-    }
-  })
-document.querySelector('#eat-xuong')
-  .addEventListener('click', e => {
-    percent = percent + step3;
-    setProgress(percent);
-    if (percent >= 100) {
-      percent = 100;
-      setTimeout(() => { setProgress(percent); }, 0);
-    }
-  })
-
-  // vong 2 ************************************************************
-  var circleTwo = document.querySelector('#circle-two');
-  var radiusTwo = circleTwo.r.baseVal.value;
-  var circumferenceTwo = radiusTwo * 2 * Math.PI;
-  
-  circleTwo.style.strokeDasharray = `${circumferenceTwo} ${circumferenceTwo}`;
-  circleTwo.style.strokeDashoffset = `${circumferenceTwo}`;
-  
-  function setProgres(percents) {
-    const offsets = circumferenceTwo - percents / 100 * circumferenceTwo;
-    circleTwo.style.strokeDashoffset = offsets;
+  setProgress(percent) {
+    const offset = this._circumference - (percent / 100 * this._circumference);
+    const circle = this._root.querySelector('circle');
+    circle.style.strokeDashoffset = offset;
   }
-  const steps = 20;
-  const steps2 = 10;
-  let percents = 0;
-  document.querySelector('#ball')
-    .addEventListener('click', e => {
-      percents = percents + steps;
-      setProgres(percents);
-  
-      if (percents >= 100) {
-        percents = 100;
-        setTimeout(() => { setProgres(percents); }, 0);
-      }
-    })
-    document.querySelector('#bear')
-    .addEventListener('click', e => {
-      percents = percents + steps2;
-      setProgres(percents);
-  
-      if (percents >= 100) {
-        percents = 100;
-        setTimeout(() => { setProgres(percents); }, 0);
-      }
-    })
+
+
+
+  static get observedAttributes() {
+    return ['progress'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'progress') {
+      this.setProgress(newValue);
+    }
+  }
+}
+
+window.customElements.define('progress-ring', ProgressRing);
+
+let progress = 100;
+const el = document.querySelector('#progressRing');
+
+el.setAttribute('progress', progress);
+const interval = setInterval(() => {
+  if (progress <= 0) {
+    progress = 0;
+    alert("Thú cưng của bạn đã chết, hãy bắt đầu lại!!");
+  } else {
+    progress -= 10;
+  }
+  if (progress < 0) {
+    return;
+  }
+  console.log(progress);
+  el.setAttribute('progress', progress);
+}, 7000);
+
+const eatOne = document.querySelector('#eat-one');
+eatOne.addEventListener('click', e => {
+  if (progress < 100) {
+    progress += 20;
+  } else {
+    return
+  }
+  if (progress > 100) progress = 100;
+  console.log(progress);
+  el.setAttribute('progress', progress);
+})
+
+const eatXuong = document.querySelector('#eat-xuong');
+eatXuong.addEventListener('click', e => {
+  if (progress < 100) {
+    progress += 30;
+  } else {
+    return
+  }
+  if (progress > 100) progress = 100;
+  console.log(progress);
+  el.setAttribute('progress', progress);
+})
+
+const drinkMill = document.querySelector('#drink-mill');
+drinkMill.addEventListener('click', e => {
+  if (progress < 100) {
+    progress += 10;
+  } else {
+    return
+  }
+  if (progress > 100) progress = 100;
+  console.log(progress);
+  el.setAttribute('progress', progress);
+})
+
+// vong 2 ************************************************************
+
+class ProgressRing2 extends HTMLElement {
+  constructor() {
+    super();
+    const stroke2 = this.getAttribute('stroke');
+    const radius2 = this.getAttribute('radius');
+    const normalizedRadius2 = radius2 - stroke2 * 2;
+    this._circumference = normalizedRadius2 * 2 * Math.PI;
+
+    this._root = this.attachShadow({ mode: 'open' });
+    this._root.innerHTML = `
+                                <svg
+                                    height="${radius2 * 2}"
+                                    width="${radius2 * 2}"
+                                >
+                                    <circle
+                                    id ="circle-two"
+                                    stroke="brown"
+                                    stroke-dasharray="${this._circumference} ${this._circumference}"
+                                    style="stroke-dashoffset:${this._circumference}"
+                                    stroke-width="${stroke2}"
+                                    fill="bisque"
+                                    r="${normalizedRadius2}"
+                                    cx="${radius2}"
+                                    cy="${radius2}"
+                                    />
+                                </svg>
+
+                                <style>
+                                    circle {
+                                    transition: stroke-dashoffset 0.35s;
+                                    transform: rotate(-90deg);
+                                    transform-origin: 50% 50%;
+                                    }
+                                </style>
+                                `;
+  } // end constructor
+
+  setProgress2(percent2) {
+    const offset2 = this._circumference - (percent2 / 100 * this._circumference);
+    const circle2 = this._root.querySelector('#circle-two');
+    circle2.style.strokeDashoffset = offset2;
+  }
+
+
+
+  static get observedAttributes() {
+    return ['progress2'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'progress2') {
+      this.setProgress2(newValue);
+    }
+  }
+}
+
+window.customElements.define('progress-ring2', ProgressRing2);
+
+// emulate progress attribute change
+let progress2 = 100;
+const el2 = document.querySelector('#progressRing2');
+
+el2.setAttribute('progress2', progress2);
+const interval2 = setInterval(() => {
+  if (progress2 <= 0) {
+    progress2 = 0;
+  } else {
+    progress2 -= 10;
+  }
+  if (progress2 < 0) return;
+  el2.setAttribute('progress2', progress2);
+}, 5000);
+
+const ball = document.querySelector('#ball');
+ball.addEventListener('click', e => {
+  if (progress2 < 100) {
+    progress2 += 30;
+  } else {
+    return
+  }
+  if (progress2 > 100) progress2 = 100;
+  console.log(progress2);
+  el2.setAttribute('progress2', progress2);
+})
+
+const bear = document.querySelector('#bear');
+bear.addEventListener('click', e => {
+  if (progress2 < 100) {
+    progress2 += 10;
+  } else {
+    return
+  }
+  if (progress2 > 100) progress2 = 100;
+  console.log(progress2);
+  el2.setAttribute('progress2', progress2);
+})
 
 
   // vong 3 ************************************************************
-  var circle3 = document.querySelector('#circle-three');
-  var radius3 = circle3.r.baseVal.value;
-  var circumference3 = radius3 * 2 * Math.PI;
-  
-  circle3.style.strokeDasharray = `${circumference3} ${circumference3}`;
-  circle3.style.strokeDashoffset = `${circumference3}`;
-  
-  function setProgres3(percent3) {
-    const offset3 = circumference3 - percent3 / 100 * circumference3;
-    circle3.style.strokeDashoffset = offset3;
-  }
-  const stepss3 = 30;
-  let percent3 = 0;
-  document.querySelector('#clear-body')
-    .addEventListener('click', e => {
-      percent3 = percent3 + stepss3;
-      setProgres3(percent3);
-  
-      if (percent3 >= 100) {
-        percent3 = 100;
-        setTimeout(() => { setProgres3(percent3); }, 0);
-      }
-    })
+  class ProgressRing3 extends HTMLElement {
+    constructor() {
+        super();
+        const stroke3 = this.getAttribute('stroke');
+        const radius3 = this.getAttribute('radius');
+        const normalizedRadius3 = radius3 - stroke3 * 2;
+        this._circumference = normalizedRadius3 * 2 * Math.PI;
+
+        this._root = this.attachShadow({ mode: 'open' });
+        this._root.innerHTML = `
+                                <svg
+                                    height="${radius3 * 2}"
+                                    width="${radius3 * 2}"
+                                >
+                                    <circle
+                                    id ="circle-three"
+                                    stroke="brown"
+                                    stroke-dasharray="${this._circumference} ${this._circumference}"
+                                    style="stroke-dashoffset:${this._circumference}"
+                                    stroke-width="${stroke3}"
+                                    fill="bisque"
+                                    r="${normalizedRadius3}"
+                                    cx="${radius3}"
+                                    cy="${radius3}"
+                                    />
+                                </svg>
+
+                                <style>
+                                    circle {
+                                    transition: stroke-dashoffset 0.35s;
+                                    transform: rotate(-90deg);
+                                    transform-origin: 50% 50%;
+                                    }
+                                </style>
+                                `;
+    } // end constructor
+
+    setProgress3(percent3) {
+        const offset3 = this._circumference - (percent3 / 100 * this._circumference);
+        const circle3 = this._root.querySelector('#circle-three');
+        circle3.style.strokeDashoffset = offset3;
+    }
+
+
+
+    static get observedAttributes() {
+        return ['progress3'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'progress3') {
+            this.setProgress3(newValue);
+        }
+    }
+}
+
+window.customElements.define('progress-ring3', ProgressRing3);
+
+// emulate progress attribute change
+let progress3 = 100;
+const el3 = document.querySelector('#progressRing3');
+
+el3.setAttribute('progress3', progress3);
+const interval3 = setInterval(() => {
+    if (progress3 <= 0) {
+        progress3 = 0;
+    } else {
+        progress3 -= 10;
+    }
+    if (progress3 < 0) return;
+    el3.setAttribute('progress3', progress3);
+}, 9000);
+
+const clearBody = document.querySelector('#clear-body');
+clearBody.addEventListener('click', e => {
+    if (progress3 < 100) {
+      progress3 += 30;
+    } else {
+      return
+    }
+    if (progress3 > 100) progress3 = 100;
+    el3.setAttribute('progress3', progress3);
+})
