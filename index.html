@@ -28,11 +28,13 @@
         top: 65%;
         left: 31%;
     }
-    .foodutensil{
+
+    .foodutensil {
         position: absolute;
         top: 101%;
         left: 52%;
     }
+
     .status {
         position: absolute;
         top: 5%;
@@ -42,6 +44,7 @@
         border: 1px black solid;
         text-align: center;
     }
+
     .petShop {
         position: absolute;
         top: 5%;
@@ -51,12 +54,89 @@
         border: 1px black solid;
         text-align: center;
     }
+
+    .progress-table {
+        display: flex;
+        flex-direction: column;
+        padding-top: 20px;
+        align-items: flex-start;
+    }
+
+    .progress-ring__circle {
+        transition: 0.35s stroke-dashoffset;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+    }
+
+    .progress-table span{
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .table-eat {
+        position: absolute;
+    }
+    .image-eat{
+        background-color: transparent;
+        border: none;
+        display: flex;
+    }
 </style>
 
 <body>
     <div class="status">
+        <div class="progress-table">
+            <div class="progress-one">
+                <svg class="progress-ring" width="65" height="50">
+                    <circle class="progress-ring__circle " id="circle-one" stroke="aquamarine" stroke-width="10" fill="white" r="15"
+                        cx="30" cy="20" />
+                </svg>
+                <span>Thức ăn</span>
+            </div>
+            <div class="progress-two">
+                <svg class="progress-ring" width="65" height="50">
+                    <circle class="progress-ring__circle " id="circle-two" stroke="aquamarine" stroke-width="10" fill="white" r="15"
+                        cx="30" cy="20" />
+                </svg>
+                <span>Niềm Vui</span>
+            </div>
+            <div class="progress-three">
+                <svg class="progress-ring" width="65" height="50">
+                    <circle class="progress-ring__circle " id="circle-three" stroke="aquamarine" stroke-width="10" fill="white" r="15"
+                        cx="30" cy="20" />
+                </svg>
+                <span>Tắm Rửa</span>
+            </div>
+        </div>
     </div>
     <div class="petShop">
+        <div class="table-eat">
+            <button id="eat-one" class="image-eat">
+                <img src="./public/images/dodungtas-removebg.png" alt="" width="28%">
+                <span>Hạt : 20 Vàng</span>
+            </button>
+            <button id="eat-xuong" class="image-eat">
+                <img src="./public/images/xương.png" alt="" width="28%">
+                <span style="margin-top: 10px;">Xương : 30 Vàng</span>
+            </button>
+            <button id="drink-mill" class="image-eat">
+                <img src="./public/images/mill.png" alt="" width="28%">
+                <span style="margin-top: 10px;">Sữa : 10 Vàng</span>
+            </button>
+            <button id="ball" class="image-eat">
+                <img src="./public/images/banh.png" alt="" width="25%">
+                <span style="margin-top: 10px;">Banh : 30 Vàng</span>
+            </button>
+            <button id="bear" class="image-eat">
+                <img src="./public/images/gau.png" alt="" width="25%">
+                <span style="margin-top: 10px;">Gấu : 10 Vàng</span>
+            </button>
+            <button id="clear-body" class="image-eat">
+                <img src="./public/images/tam.png" alt="" width="25%">
+                <span style="margin-top: 10px;">Vòi Sen : 30 Vàng</span>
+            </button>
+        </div>
     </div>
     <div class="pet">
         <img src="public/images/tam.gif" alt="" width="65%">
@@ -64,6 +144,8 @@
     <div class="foodutensil">
         <img src="public/images/trong-removebg-preview.png" alt="" width="15%">
     </div>
+
+<script src="./public/js/vong1.js"></script>
 </body>
 
 </html>
