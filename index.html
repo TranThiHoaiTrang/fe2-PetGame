@@ -21,12 +21,18 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        /* overflow: hidden; */
     }
 
     .pet {
         position: absolute;
         top: 65%;
         left: 31%;
+    }
+    .petFeel {
+        position: absolute;
+        top: 76%;
+        left: 33%;
     }
 
     .foodutensil {
@@ -39,10 +45,11 @@
         position: absolute;
         top: 5%;
         left: 1%;
-        width: 200px;
+        width: 188px;
         height: 300px;
-        border: 1px black solid;
         text-align: center;
+        fill: rgba(255, 255, 255, 0.851);
+        background: #FCD9C4;
     }
 
     .petShop {
@@ -51,14 +58,14 @@
         right: 1%;
         width: 200px;
         height: 300px;
-        border: 1px black solid;
-        text-align: center;
+        fill: rgba(255, 255, 255, 0.851);
+        background: #FACE9C;
     }
 
     .progress-table {
         display: flex;
         flex-direction: column;
-        padding-top: 20px;
+        padding: 20px 10px 10px;
         align-items: flex-start;
     }
 
@@ -69,13 +76,13 @@
     }
 
     .progress-table label {
-        padding-top: 15px;
+        padding-top: 18px;
         color: indigo;
-        font-size: 22px;
+        font-size: 15px;
         font-weight: 500;
     }
 
-    .progress-pro{
+    .progress-pro {
         display: flex;
     }
 
@@ -88,9 +95,42 @@
         border: none;
         display: flex;
     }
-    .image-eat span{
+
+    .image-eat span {
         color: darkslategray;
         font-weight: 700;
+    }
+
+    .coinAnimation {
+        position: absolute;
+        top: 10%;
+        /* top: -10%; */
+        display: none;
+    }
+
+    .coinpet {
+        animation: animaInfo 10s ease-in-out;
+        z-index: 1;
+    }
+
+    .resource {
+        position: absolute;
+        right: 3%;
+        bottom: -9%;
+    }
+
+    #coins {
+        border: 1px black solid;
+    }
+
+    @keyframes animaInfo {
+        0% {
+            transform: translateY(0);
+        }
+
+        99% {
+            transform: translateY(500px);
+        }
     }
 </style>
 
@@ -104,10 +144,10 @@
                 </div>
             </div>
             <div class="progress-two progress-pro">
-                <progress-ring2 stroke="5" radius="30" progress="0" id="progressRing2"></progress-ring2>
                 <div class="lable">
-                    <label>Niềm Vui</label>
+                    <label>Cảm xúc</label>
                 </div>
+                <progress-ring2 stroke="5" radius="30" progress="0" id="progressRing2"></progress-ring2>
             </div>
             <div class="progress-three progress-pro">
                 <progress-ring3 stroke="5" radius="30" progress="0" id="progressRing3"></progress-ring3>
@@ -133,23 +173,30 @@
             </button>
             <button id="ball" class="image-eat">
                 <img src="./public/images/banh.png" alt="" width="25%">
-                <span style="margin-top: 10px;">Banh : 30 Vàng</span>
+                <span style="margin-top: 10px;">Bóng : 30 Vàng</span>
             </button>
             <button id="bear" class="image-eat">
                 <img src="./public/images/gau.png" alt="" width="25%">
                 <span style="margin-top: 10px;">Gấu : 10 Vàng</span>
             </button>
             <button id="clear-body" class="image-eat">
-                <img src="./public/images/tam.png" alt="" width="25%">
+                <img src="./public/images/showerDog.png" alt="" width="25%">
                 <span style="margin-top: 10px;">Vòi Sen : 30 Vàng</span>
             </button>
         </div>
     </div>
+    <div class="coinAnimation" onclick="pickUpCoin()">
+        <img src="public/images/coin.gif" alt="" width="60px" class="coinpet" id="coin">
+    </div>
+    <div class="resource">
+        <p id="coins">100</p>
+        <img src="public/images/golds.png" alt="" width="60px">
+    </div>
     <div class="pet">
-        <img src="public/images/tam.gif" alt="" width="65%">
+        <img src="public/images/tam.gif" alt="" width="65%" id="dogFeel">
     </div>
     <div class="foodutensil">
-        <img src="public/images/trong-removebg-preview.png" alt="" width="15%">
+        <img src="public/images/trong-removebg-preview.png" alt="" width="15%" id="toTA">
     </div>
 
     <script src="./public/js/vong1.js"></script>
