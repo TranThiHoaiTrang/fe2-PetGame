@@ -2,8 +2,8 @@
 let coins = 100;
 let originalCoin = document.getElementById('coins');
 let coin = document.querySelector('.coinAnimation');
-console.log(coin);
-console.log(originalCoin);
+// console.log(coin);
+// console.log(originalCoin);
 let pickUpCoin = () => {
   coins += 20;
   originalCoin.textContent = coins;
@@ -78,67 +78,101 @@ class ProgressRing extends HTMLElement {
 window.customElements.define('progress-ring', ProgressRing);
 
 let progress = 100;
+let qty = 2;
 dogFeel = document.querySelector('#dogFeel');
 pet = document.querySelector('.pet');
 const el = document.querySelector('#progressRing');
+let quantity = document.querySelector('.quantity');
 el.setAttribute('progress', progress);
-const interval = setInterval(() => {
+function setImage(){
   if (progress <= 0) {
     progress = 0;
-    alert("Thú cưng của bạn đã chết, hãy bắt đầu lại!!");
+    // alert("Thú cưng của bạn đã chết, hãy bắt đầu lại!!");
   } else {
     progress -= 20;
   }
   if (progress < 0) {
     return;
   }
-  console.log(progress);
+  // console.log(progress);
+
+  //diều kiện khi đói đôi 
   if (progress < 50) {
-    dogFeel.src = "public/images/hungryPet.gif";
-    pet.className = "petFeel";
+    
+    document.getElementById("dogFeel").style.display = "none";
+    document.getElementById("hungryPet").style.display = "block";
+
   }
   if (progress >= 50) {
-    dogFeel.src = "public/images/tam.gif";
-    pet.className = "pet";
+    document.getElementById("dogFeel").style.display = "block";
+    document.getElementById("hungryPet").style.display = "none";
   }
   el.setAttribute('progress', progress);
+
+}
+setInterval(() => {
+  setImage()
+}, 100);
+const interval = setInterval(() => {
+  el.setAttribute('progress', progress);
 }, 7000);
-let toTA = document.getElementById('toTA');
-const eatOne = document.querySelector('#eat-one');
-eatOne.addEventListener('click', e => {
-  if (coins >= 20) {
+
+let qtyFood = 4;
+const eatFood = document.querySelector('#toTA');
+eatFood.addEventListener('click', e => {
+  qtyFood -= 1;
+  qty = Math.round(qtyFood / 2);
+  quantity.textContent = qty;
+  if (qtyFood >= 0) {
     if (progress < 100) {
-      coins -= 10;
       progress += 20;
-      replenishReversal1();
-      setTimeout(() => {
-        progress += 20;
-        replenishReversal2();
-      }, 10000);
-      originalCoin.textContent = coins;
+      console.log(qtyFood);
     } else {
       return
     }
+    if (qtyFood == 0) {
+      replenishReversal2();
+    }
     if (progress > 100) progress = 100;
-    console.log(progress);
+    // console.log(progress);
     el.setAttribute('progress', progress);
+  } else {
+    replenishReversal2();
   }
-  else {
+})
+//
+// var number = 2.5;
+// var rounded = Math.round(number);
+// // alert(rounded);
+const eatOne = document.querySelector('#eat-one');
+
+eatOne.addEventListener('click', e => {
+  replenishReversal1();
+  if (coins >= 20) {
+    qty += 1;
+    qtyFood += 2;
+    coins -= 20;
+    qty = Math.round(qtyFood / 2);
+    quantity.textContent = qty;
+    originalCoin.textContent = coins;
+  } else {
     alert('Bạn không đủ tiền!')
   }
 })
 
+//
 let replenishReversal1 = () => {
-  toTA.src = "public/images/dodungtas-removebg.png";
+  eatFood.src = "public/images/dodungtas-removebg.png";
 };
 let replenishReversal2 = () => {
-  toTA.src = "public/images/trong-removebg-preview.png";
+  eatFood.src = "public/images/trong-removebg-preview.png";
 };
 
 const eatXuong = document.querySelector('#eat-xuong');
 eatXuong.addEventListener('click', e => {
   if (progress < 100) {
     progress += 30;
+    coins -=30;
   } else {
     return
   }
@@ -303,8 +337,6 @@ class ProgressRing3 extends HTMLElement {
     circle3.style.strokeDashoffset = offset3;
   }
 
-
-
   static get observedAttributes() {
     return ['progress3'];
   }
@@ -321,22 +353,28 @@ window.customElements.define('progress-ring3', ProgressRing3);
 // emulate progress attribute change
 let progress3 = 100;
 const el3 = document.querySelector('#progressRing3');
-
+let fly = document.querySelector('#fly');
 el3.setAttribute('progress3', progress3);
+
 const interval3 = setInterval(() => {
   if (progress3 <= 0) {
     progress3 = 0;
   } else {
-    progress3 -= 5;
+    progress3 -= 20;
   }
   if (progress3 < 0) return;
   el3.setAttribute('progress3', progress3);
+  if (progress3 < 30) {
+    fly.src = "public/images/fly.gif";
+  } else {
+    fly.src = "#";
+  }
 }, 9000);
 
 const clearBody = document.querySelector('#clear-body');
 clearBody.addEventListener('click', e => {
   if (progress3 < 100) {
-    progress3 += 30;
+    progress3 = 100;
   } else {
     return
   }

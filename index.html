@@ -6,200 +6,161 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Game</title>
-
+    <link rel="icon" type="image/x-icon" href="./public/images/tam.gif">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="./public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 
 </head>
-<style>
-    body {
-        position: relative;
-        background-image: url('bg-game.jpg');
-        height: 580px;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        /* overflow: hidden; */
-    }
-
-    .pet {
-        position: absolute;
-        top: 65%;
-        left: 31%;
-    }
-    .petFeel {
-        position: absolute;
-        top: 76%;
-        left: 33%;
-    }
-
-    .foodutensil {
-        position: absolute;
-        top: 101%;
-        left: 52%;
-    }
-
-    .status {
-        position: absolute;
-        top: 5%;
-        left: 1%;
-        width: 188px;
-        height: 300px;
-        text-align: center;
-        fill: rgba(255, 255, 255, 0.851);
-        background: #FCD9C4;
-    }
-
-    .petShop {
-        position: absolute;
-        top: 5%;
-        right: 1%;
-        width: 200px;
-        height: 300px;
-        fill: rgba(255, 255, 255, 0.851);
-        background: #FACE9C;
-    }
-
-    .progress-table {
-        display: flex;
-        flex-direction: column;
-        padding: 20px 10px 10px;
-        align-items: flex-start;
-    }
-
-    .progress-ring__circle {
-        transition: 0.35s stroke-dashoffset;
-        transform: rotate(-90deg);
-        transform-origin: 50% 50%;
-    }
-
-    .progress-table label {
-        padding-top: 18px;
-        color: indigo;
-        font-size: 15px;
-        font-weight: 500;
-    }
-
-    .progress-pro {
-        display: flex;
-    }
-
-    .table-eat {
-        position: absolute;
-    }
-
-    .image-eat {
-        background-color: transparent;
-        border: none;
-        display: flex;
-    }
-
-    .image-eat span {
-        color: darkslategray;
-        font-weight: 700;
-    }
-
-    .coinAnimation {
-        position: absolute;
-        top: 10%;
-        /* top: -10%; */
-        display: none;
-    }
-
-    .coinpet {
-        animation: animaInfo 10s ease-in-out;
-        z-index: 1;
-    }
-
-    .resource {
-        position: absolute;
-        right: 3%;
-        bottom: -9%;
-    }
-
-    #coins {
-        border: 1px black solid;
-    }
-
-    @keyframes animaInfo {
-        0% {
-            transform: translateY(0);
-        }
-
-        99% {
-            transform: translateY(500px);
-        }
-    }
-</style>
 
 <body>
-    <div class="status">
-        <div class="progress-table">
-            <div class="progress-one progress-pro">
-                <progress-ring stroke="5" radius="30" progress="0" id="progressRing"></progress-ring>
-                <div class="lable">
-                    <label>Thức ăn</label>
-                </div>
-            </div>
-            <div class="progress-two progress-pro">
-                <div class="lable">
-                    <label>Cảm xúc</label>
-                </div>
-                <progress-ring2 stroke="5" radius="30" progress="0" id="progressRing2"></progress-ring2>
-            </div>
-            <div class="progress-three progress-pro">
-                <progress-ring3 stroke="5" radius="30" progress="0" id="progressRing3"></progress-ring3>
-                <div class="lable">
-                    <label>Tắm rửa</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="petShop">
-        <div class="table-eat">
-            <button id="eat-one" class="image-eat">
-                <img src="./public/images/dodungtas-removebg.png" alt="" width="28%">
-                <span>Hạt : 20 Vàng</span>
+    <div id="startGame">
+        <div class="btn-start-game">
+            <button class="blob-btn" onClick="onStartGame()">
+                Bắt đầu
+                <span class="blob-btn__inner">
+                    <span class="blob-btn__blobs">
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                    </span>
+                </span>
             </button>
-            <button id="eat-xuong" class="image-eat">
-                <img src="./public/images/xương.png" alt="" width="28%">
-                <span style="margin-top: 10px;">Xương : 30 Vàng</span>
-            </button>
-            <button id="drink-mill" class="image-eat">
-                <img src="./public/images/mill.png" alt="" width="28%">
-                <span style="margin-top: 10px;">Sữa : 10 Vàng</span>
-            </button>
-            <button id="ball" class="image-eat">
-                <img src="./public/images/banh.png" alt="" width="25%">
-                <span style="margin-top: 10px;">Bóng : 30 Vàng</span>
-            </button>
-            <button id="bear" class="image-eat">
-                <img src="./public/images/gau.png" alt="" width="25%">
-                <span style="margin-top: 10px;">Gấu : 10 Vàng</span>
-            </button>
-            <button id="clear-body" class="image-eat">
-                <img src="./public/images/showerDog.png" alt="" width="25%">
-                <span style="margin-top: 10px;">Vòi Sen : 30 Vàng</span>
-            </button>
-        </div>
-    </div>
-    <div class="coinAnimation" onclick="pickUpCoin()">
-        <img src="public/images/coin.gif" alt="" width="60px" class="coinpet" id="coin">
-    </div>
-    <div class="resource">
-        <p id="coins">100</p>
-        <img src="public/images/golds.png" alt="" width="60px">
-    </div>
-    <div class="pet">
-        <img src="public/images/tam.gif" alt="" width="65%" id="dogFeel">
-    </div>
-    <div class="foodutensil">
-        <img src="public/images/trong-removebg-preview.png" alt="" width="15%" id="toTA">
-    </div>
+            <br />
 
-    <script src="./public/js/vong1.js"></script>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                <defs>
+                    <filter id="goo">
+                        <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7"
+                            result="goo"></feColorMatrix>
+                        <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+    </div>
+    <div id="mainGame">
+        <div class="progress-action">
+            <div class="progress-item">
+                <svg class="progress-ring">
+                    <circle id="progressBarHung" class="progress-ring__circle" stroke="red" stroke-width="4"
+                        fill="transparent" r="20" cx="30" cy="30" />
+                </svg>
+                <div class="lable">
+                    Thức ăn
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="lable">
+                    Cảm xúc
+                </div>
+                <svg class="progress-ring">
+                    <circle id="progressBarHapp" class="progress-ring__circle" stroke="green" stroke-width="4"
+                        fill="transparent" r="20" cx="30" cy="30" />
+                </svg>
+            </div>
+            <div class="progress-item">
+                <svg class="progress-ring">
+                    <circle id="progressBarHygienic" class="progress-ring__circle" stroke="aqua" stroke-width="4"
+                        fill="transparent" r="20" cx="30" cy="30" />
+                </svg>
+                <div class="lable">
+                    Vệ sinh
+                </div>
+            </div>
+            <div class="level"></div>
+        </div>
+        <div class="music-game">
+            <button id="playpausebtn"></button>
+            <button id="mutebtn" class="ml-2"></button>
+        </div>
+        <div class="petShop">
+            <div class="table-eat">
+                <button class="image-eat" onClick="onBuy('food',20)">
+                    <div class="quantity" id="countFree">2</div>
+                    <img src="./public/images/dodungtas-removebg.png" alt="" width="28%">
+                    <span>Hạt : 20 Vàng</span>
+                </button>
+                <button id="eat-xuong" class="image-eat" onClick="onBuy('happiness',30)">
+                    <img src="./public/images/xương.png" alt="" width="28%">
+                    <span style="margin-top: 10px;">Xương : 30 Vàng</span>
+                </button>
+                <button id="drink-mill" class="image-eat" onClick="onBuy('happiness',10)">
+                    <img src="./public/images/mill.png" alt="" width="28%">
+                    <span style="margin-top: 10px;">Sữa : 10 Vàng</span>
+                </button>
+                <button id="ball" class="image-eat" onClick="onBuy('happiness',30)">
+                    <img src="./public/images/banh.png" alt="" width="25%">
+                    <span style="margin-top: 10px;">Bóng : 30 Vàng</span>
+                </button>
+                <button id="bear" class="image-eat" onClick="onBuy('happiness',10)">
+                    <img src="./public/images/gau.png" alt="" width="25%">
+                    <span style="margin-top: 10px;">Gấu : 10 Vàng</span>
+                </button>
+                <button id="clear-body" class="image-eat" onClick="onBuy('hygienic',30)">
+                    <img src="./public/images/showerDog.png" alt="" width="25%">
+                    <span style="margin-top: 10px;">Vệ sinh : 30 Vàng</span>
+                </button>
+            </div>
+        </div>
+        <div class="coinAnimation" onclick="pickUpCoin()">
+            <img src="public/images/coin.gif" alt="" width="60px" class="coinpet" id="coin">
+        </div>
+        <div class="resource">
+            <img src="public/images/golds.png" alt="" width="60px">
+            <p id="coins">100</p>
+        </div>
+        <div class="pet">
+            <img src="public/images/tam.gif" alt="" id="dogFeel">
+            <img src="public/images/hungryPet.gif" alt="" id="hungryPet">
+        </div>
+        <div class="foodutensil">
+            <img src="./public/images/trong-removebg-preview.png" alt="" id="foodDog">
+        </div>
+    </div>
+    <div class="noti-game" id="noteGame">
+        <div class="text-center pt-2 pb-3" id="noti-game-title">
+            Demo chưa có nội dung nhé
+        </div>
+        <div class="w-100 text-center">
+            <div onClick="closeNotiGame()" class="btn-noti">
+                <svg>
+                    <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+                  </svg>
+                Đóng
+            </div>
+        </div>
+    </div>
+    <div class="game-over" id="gameOver">
+        <div class="gameover">
+            <p> GAME </p>
+            <p> OVER </p>
+        </div>
+        <div class="continue">
+            <p> BẠN CÓ MUỐN TIẾP TỤC CHƠI GAME ? </p>
+        </div>
+
+        <div class="action">
+            <div class="yes" id="continue" onClick="continueGame()"> TIẾP TỤC </div>
+            <div class="no" id="black" onClick="blackGame()"> THOÁT</div>
+        </div>
+    </div>
+    <!-- <script src="./public/js/vong1.js"></script> -->
+    <script src="./public/js/main.js"></script>
+    <!-- JS BOOTRAP -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </body>
 
 </html>
