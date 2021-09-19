@@ -14,6 +14,7 @@ let foodDog = document.getElementById("foodDog");
 let startGame = document.getElementById("startGame");
 let mainGame = document.getElementById("mainGame");
 let noteGame = document.getElementById("noteGame");
+let notiGameTile = document.getElementById("noti-game-title");
 let gameOver = document.getElementById("gameOver");
 function setCircleHungerProgress(hunger) {
     var radius = circleHungerProgress.r.baseVal.value;
@@ -49,16 +50,30 @@ function setImageDog(hunger) {
         hungryPet.style.display = "block"
     }
 }
+function showNoti() {
+    noteGame.style.display = "block";
+}
 function onBuy(name, price) {
     if (name === "food") {
         countFree = countFree - 1;
 
         if (countFree < 0) {
             free.textContent = 0;
-            free.textContent = countFree;
             if (hunger >= 100) {
+                showNoti();
+                notiGameTile.innerHTML = `
+                    <span>Thức ăn đã</span>
+                    <br>
+                    <b>đầy đủ</b>
+                `
                 //    show thông báo thức ăn đã 100%
             } else if (coins < 20) {
+                showNoti();
+                notiGameTile.innerHTML = `
+                    <span>Số tiền không đủ để mua</span>
+                    <br>
+                    <b>Thức ăn</b>
+                `
                 //    show thông báo số tiền không đủ
             }
             else if (coins >= 20) {
@@ -74,8 +89,20 @@ function onBuy(name, price) {
         else {
             free.textContent = countFree;
             if (hunger >= 100) {
+                showNoti();
+                notiGameTile.innerHTML = `
+                    <span>Thức ăn đã</span>
+                    <br>
+                    <b>đầy đủ</b>
+                `
                 //    show thông báo thức ăn đã 100%
             } else if (coins < 20) {
+                showNoti();
+                notiGameTile.innerHTML = `
+                    <span>Số tiền không đủ để mua</span>
+                    <br>
+                    <b>Thức ăn</b>
+                `
                 //    show thông báo số tiền không đủ
             }
             else if (coins >= 20) {
@@ -92,9 +119,21 @@ function onBuy(name, price) {
     else if (name === "happiness") {
         if (happiness >= 100) {
             // show thông báo cảm xúc đã 100%
+            showNoti();
+            notiGameTile.innerHTML = `
+                <span>Cảm xúc đã</span>
+                <br>
+                <b>100%</b>
+            `
         }
         else if (coins < price) {
             //   show thông báo tiền không đủ
+            showNoti();
+            notiGameTile.innerHTML = `
+                <span>Tiền của bạn không đủ mua thêm</span>
+                <br>
+                <b>cảm xúc</b>
+            `
         } else if (coins >= price) {
             coins -= price;
             happiness += price;
@@ -107,9 +146,21 @@ function onBuy(name, price) {
     else if (name === "hygienic") {
         if (hygienic >= 100) {
             // show thông báo cảm xúc đã 100%
+            showNoti();
+            notiGameTile.innerHTML = `
+                <span>Vệ sinh đã </span>
+                <br>
+                <b>sạch sẽ </b>
+            `
         }
         else if (coins < price) {
             //   show thông báo tiền không đủ
+            showNoti();
+            notiGameTile.innerHTML = `
+                <span>Tiền của bạn không đủ mua thêm</span>
+                <br>
+                <b>dịch vụ Vệ sinh</b>
+            `
         } else if (coins >= price) {
             coins -= price;
             hygienic += price;
@@ -171,8 +222,12 @@ function playAudioGame() {
         }
     }
 }
-function closeNotigame() {
-    noteGame.style.display = "block";
+// function closeNotigame() {
+//     console.log("đã tắt");
+//     noteGame.style.display = "none";
+// }
+noteGame.onclick = function(){
+    noteGame.style.display = "none";
 }
 function continueGame() {
     coins -= coins;
@@ -191,12 +246,11 @@ function continueGame() {
     gameOver.style.display = "none";
 }
 function blackGame(){
-    setTimeout(() => {
-        gameOver.style.display = "none";
-        noteGame.style.display = "none";
-        startGame.style.display = "block";
-        mainGame.style.display = "none";
-    }, 100);
+    gameOver.style.display = "none";
+    noteGame.style.display = "none";
+    startGame.style.display = "block";
+    mainGame.style.display = "none";
+    audio.play();
 }
 let onStart = () => {
     hygienic -= 3;
