@@ -3,6 +3,7 @@ let hygienic = 100;
 let happiness = 100;
 let coins = 100;
 let countFree = 2;
+let eatFood = 4;
 var circleHungerProgress = document.querySelector('#progressBarHung');
 var circleHappinessProgress = document.querySelector('#progressBarHapp');
 var circleHygienicProgress = document.querySelector('#progressBarHygienic');
@@ -56,7 +57,6 @@ function showNoti() {
 function onBuy(name, price) {
     if (name === "food") {
         countFree = countFree - 1;
-
         if (countFree < 0) {
             free.textContent = 0;
             if (hunger >= 100) {
@@ -77,6 +77,7 @@ function onBuy(name, price) {
                 //    show thông báo số tiền không đủ
             }
             else if (coins >= 20) {
+                eatFood += 2;
                 foodDog.src = "./public/images/dodungtas-removebg.png";
                 coins -= price;
                 hunger += price;
@@ -87,7 +88,7 @@ function onBuy(name, price) {
             }
         }
         else {
-            free.textContent = countFree;
+            // free.textContent = countFree;
             if (hunger >= 100) {
                 showNoti();
                 notiGameTile.innerHTML = `
@@ -107,6 +108,8 @@ function onBuy(name, price) {
             }
             else if (coins >= 20) {
                 foodDog.src = "./public/images/dodungtas-removebg.png";
+                free = Math.round(eatFood / 2);
+                free.textContent = countFree;
                 // coins -= price;
                 hunger += price;
                 if (coins < 0) { coins = 0; };
@@ -172,7 +175,10 @@ function onBuy(name, price) {
     }
 }
 foodDog.onclick = function () {
-    foodDog.src = "./public/images/trong-removebg-preview.png"
+    foodDog.src = "./public/images/trong-removebg-preview.png";
+    eatFood -= 1;
+    free = Math.round(eatFood / 2);
+    free.textContent = countFree;
 }
 function onStartGame() {
     startGame.style.display = "none";
@@ -226,7 +232,7 @@ function playAudioGame() {
 //     console.log("đã tắt");
 //     noteGame.style.display = "none";
 // }
-noteGame.onclick = function(){
+noteGame.onclick = function () {
     noteGame.style.display = "none";
 }
 function continueGame() {
@@ -245,7 +251,7 @@ function continueGame() {
     setInterval(onStart, 5000);
     gameOver.style.display = "none";
 }
-function blackGame(){
+function blackGame() {
     gameOver.style.display = "none";
     noteGame.style.display = "none";
     startGame.style.display = "block";
