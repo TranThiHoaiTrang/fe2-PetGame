@@ -54,20 +54,13 @@ function setImageDog(hunger) {
 function showNoti() {
     noteGame.style.display = "block";
 }
+
 function onBuy(name, price) {
     if (name === "food") {
-        countFree = countFree - 1;
         if (countFree < 0) {
-            free.textContent = 0;
-            if (hunger >= 100) {
-                showNoti();
-                notiGameTile.innerHTML = `
-                    <span>Thức ăn đã</span>
-                    <br>
-                    <b>đầy đủ</b>
-                `
-                //    show thông báo thức ăn đã 100%
-            } else if (coins < 20) {
+            // free.textContent = 0;
+            free.style.display = "none";
+            if (coins < 20) {
                 showNoti();
                 notiGameTile.innerHTML = `
                     <span>Số tiền không đủ để mua</span>
@@ -77,27 +70,19 @@ function onBuy(name, price) {
                 //    show thông báo số tiền không đủ
             }
             else if (coins >= 20) {
+                foodDog.src = "./public/images/dodungtas-removebg.png"
                 eatFood += 2;
-                foodDog.src = "./public/images/dodungtas-removebg.png";
+                countFree = Math.round(eatFood / 2);
                 coins -= price;
-                hunger += price;
-                if (coins < 0) { coins = 0; };
-                if (hunger > 100) { hunger = 100; };
-                coinTab.textContent = coins;
-                setCircleHungerProgress(hunger);
+                // hunger += price;
+                // if (coins < 0) { coins = 0; };
+                // if (hunger > 100) { hunger = 100; };
+                // coinTab.textContent = coins;
+                // setCircleHungerProgress(hunger);
             }
         }
         else {
-            // free.textContent = countFree;
-            if (hunger >= 100) {
-                showNoti();
-                notiGameTile.innerHTML = `
-                    <span>Thức ăn đã</span>
-                    <br>
-                    <b>đầy đủ</b>
-                `
-                //    show thông báo thức ăn đã 100%
-            } else if (coins < 20) {
+            if (coins < 20) {
                 showNoti();
                 notiGameTile.innerHTML = `
                     <span>Số tiền không đủ để mua</span>
@@ -107,15 +92,18 @@ function onBuy(name, price) {
                 //    show thông báo số tiền không đủ
             }
             else if (coins >= 20) {
-                foodDog.src = "./public/images/dodungtas-removebg.png";
-                free = Math.round(eatFood / 2);
+                foodDog.src = "./public/images/dodungtas-removebg.png"
+                eatFood += 2;
+                countFree = Math.round(eatFood / 2);
+                free.style.display = "block";
                 free.textContent = countFree;
+                coins -= price;
                 // coins -= price;
-                hunger += price;
-                if (coins < 0) { coins = 0; };
-                if (hunger > 100) { hunger = 100; };
+                // hunger += price;
+                // if (coins < 0) { coins = 0; };
+                // if (hunger > 100) { hunger = 100; };
                 coinTab.textContent = coins;
-                setCircleHungerProgress(hunger);
+                // setCircleHungerProgress(hunger);
             }
         }
     }
@@ -174,11 +162,39 @@ function onBuy(name, price) {
         }
     }
 }
+
 foodDog.onclick = function () {
-    foodDog.src = "./public/images/trong-removebg-preview.png";
-    eatFood -= 1;
-    free = Math.round(eatFood / 2);
-    free.textContent = countFree;
+    if (hunger >= 100) {
+        showNoti();
+        notiGameTile.innerHTML = `
+            <span>Thức ăn đã</span>
+            <br>
+            <b>đầy đủ</b>
+        `
+        //    show thông báo thức ăn đã 100%
+    } else {
+        if (countFree == 0) {
+            free.style.display = "none";
+        }
+        eatFood = eatFood - 1;
+        countFree = Math.round(eatFood / 2);
+        // alert("🖕🖕");
+        free.textContent = countFree;
+        if (eatFood >= 0) {
+            hunger += 20;
+            if (coins < 0) { coins = 0; };
+            if (hunger > 100) { hunger = 100; };
+            setCircleHungerProgress(hunger);
+        }
+        else {
+            eatFood = 0;
+            foodDog.src = "./public/images/trong-removebg-preview.png"
+        }
+        if (eatFood == 0) {
+            foodDog.src = "./public/images/trong-removebg-preview.png"
+            free.style.display = "none";
+        }
+    }
 }
 function onStartGame() {
     startGame.style.display = "none";
@@ -262,10 +278,10 @@ let onStart = () => {
     hygienic -= 3;
     hunger -= 6;
     happiness -= 10;
-    if (hygienic == 0 || hunger == 0 || happiness == 0) {
-        gameOver.style.display = "block";
+    // if (hygienic == 0 || hunger == 0 || happiness == 0) {
+    //     gameOver.style.display = "block";
 
-    }
+    // }
     setCircleHungerProgress(hunger);
     setCircleHappinessProgress(happiness);
     setCircleHygienicProgress(hygienic);
