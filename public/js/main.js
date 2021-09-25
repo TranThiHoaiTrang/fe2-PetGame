@@ -74,11 +74,11 @@ function onBuy(name, price) {
                 eatFood += 2;
                 countFree = Math.round(eatFood / 2);
                 coins -= price;
-                // hunger += price;
-                // if (coins < 0) { coins = 0; };
-                // if (hunger > 100) { hunger = 100; };
-                // coinTab.textContent = coins;
-                // setCircleHungerProgress(hunger);
+                hunger += price;
+                if (coins < 0) { coins = 0; };
+                if (hunger > 100) { hunger = 100; };
+                coinTab.textContent = coins;
+                setCircleHungerProgress(hunger);
             }
         }
         else {
@@ -98,12 +98,12 @@ function onBuy(name, price) {
                 free.style.display = "block";
                 free.textContent = countFree;
                 coins -= price;
-                // coins -= price;
-                // hunger += price;
-                // if (coins < 0) { coins = 0; };
-                // if (hunger > 100) { hunger = 100; };
+                coins -= price;
+                hunger += price;
+                if (coins < 0) { coins = 0; };
+                if (hunger > 100) { hunger = 100; };
                 coinTab.textContent = coins;
-                // setCircleHungerProgress(hunger);
+                setCircleHungerProgress(hunger);
             }
         }
     }
@@ -272,16 +272,22 @@ function blackGame() {
     noteGame.style.display = "none";
     startGame.style.display = "block";
     mainGame.style.display = "none";
-    audio.play();
+    hygienic = 100;
+    hunger = 100;
+    happiness = 100;
+
+    // audio.play();
 }
 let onStart = () => {
-    hygienic -= 3;
-    hunger -= 6;
-    happiness -= 10;
-    // if (hygienic == 0 || hunger == 0 || happiness == 0) {
-    //     gameOver.style.display = "block";
+    setTimeout(() => {
+        hygienic -= 3;
+        hunger -= 6;
+        happiness -= 10;
+    }, 5000);
+    if (hygienic == 0 || hunger == 0 || happiness == 0) {
+        gameOver.style.display = "block";
 
-    // }
+    }
     setCircleHungerProgress(hunger);
     setCircleHappinessProgress(happiness);
     setCircleHygienicProgress(hygienic);
