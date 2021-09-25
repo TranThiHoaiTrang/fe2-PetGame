@@ -17,6 +17,24 @@ let mainGame = document.getElementById("mainGame");
 let noteGame = document.getElementById("noteGame");
 let notiGameTile = document.getElementById("noti-game-title");
 let gameOver = document.getElementById("gameOver");
+let coin = document.querySelector('.coinAnimation');
+audio = new Audio();
+let pickUpCoin = () => {
+    coins += 20;
+    coinTab.textContent = coins;
+    coin.style.display = "none";
+}
+let randomNumber = (min, max) => {
+    return Math.random() * (max - min) + min;
+}
+
+setInterval(() => {
+    setTimeout(() => {
+        coin.style.left = randomNumber(200, 1140) + "px";
+        coin.style.display = "block";
+
+    }, 10001);
+}, 10000);
 function setCircleHungerProgress(hunger) {
     var radius = circleHungerProgress.r.baseVal.value;
     var circumference = radius * 2 * Math.PI;
@@ -74,11 +92,11 @@ function onBuy(name, price) {
                 eatFood += 2;
                 countFree = Math.round(eatFood / 2);
                 coins -= price;
-                hunger += price;
-                if (coins < 0) { coins = 0; };
-                if (hunger > 100) { hunger = 100; };
+                // hunger += price;
+                // if (coins < 0) { coins = 0; };
+                // if (hunger > 100) { hunger = 100; };
                 coinTab.textContent = coins;
-                setCircleHungerProgress(hunger);
+                // setCircleHungerProgress(hunger);
             }
         }
         else {
@@ -98,12 +116,12 @@ function onBuy(name, price) {
                 free.style.display = "block";
                 free.textContent = countFree;
                 coins -= price;
-                coins -= price;
-                hunger += price;
-                if (coins < 0) { coins = 0; };
-                if (hunger > 100) { hunger = 100; };
+                // coins -= price;
+                // hunger += price;
+                // if (coins < 0) { coins = 0; };
+                // if (hunger > 100) { hunger = 100; };
                 coinTab.textContent = coins;
-                setCircleHungerProgress(hunger);
+                // setCircleHungerProgress(hunger);
             }
         }
     }
@@ -163,6 +181,13 @@ function onBuy(name, price) {
     }
 }
 
+dogFeel.onclick = function () {
+    happiness += 1;
+    if (happiness > 100) { happiness = 100; }
+    setCircleHappinessProgress(happiness);
+
+}
+
 foodDog.onclick = function () {
     if (hunger >= 100) {
         showNoti();
@@ -196,6 +221,7 @@ foodDog.onclick = function () {
         }
     }
 }
+
 function onStartGame() {
     startGame.style.display = "none";
     mainGame.style.display = "block";
@@ -204,7 +230,6 @@ function onStartGame() {
     setInterval(onStart, 5000);
 }
 function playAudioGame() {
-    audio = new Audio();
     audio.src = "./public/images/music-game-main.mp3";
     audio.loop = true;
     audio.oncanplaythrough = (event) => {
@@ -275,16 +300,17 @@ function blackGame() {
     hygienic = 100;
     hunger = 100;
     happiness = 100;
-
+    audio.pause();
+    audio.src="";
     // audio.play();
 }
 let onStart = () => {
     setTimeout(() => {
         hygienic -= 3;
         hunger -= 6;
-        happiness -= 10;
-    }, 5000);
-    if (hygienic == 0 || hunger == 0 || happiness == 0) {
+        happiness = 10;
+    }, 2000);
+    if (hygienic <= 0 || hunger <= 0 || happiness <= 0) {
         gameOver.style.display = "block";
 
     }

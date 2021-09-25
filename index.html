@@ -79,45 +79,47 @@
         </div>
         <div class="petShop">
             <div class="table-eat">
+                <button id="clear-body" class="image-eat" onClick="onBuy('hygienic',30)">
+                    <!-- <span style="margin-top: 10px;">Vệ sinh:</span> -->
+                    <span style="margin-top: 10px;" id="coins">100</span>
+                    <img src="public/images/golds.png" alt="" width="30%">
+                </button>
                 <button class="image-eat" onClick="onBuy('food',20)">
                     <div class="quantity" id="countFree">2</div>
-                    <img src="./public/images/dodungtas-removebg.png" alt="" width="28%">
-                    <span>Hạt:</span>
+                    <img src="./public/images/dodungtas-removebg.png" alt="" width="35%">
                     <span style="width:60px;">20<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
                 </button>
                 <button id="eat-xuong" class="image-eat" onClick="onBuy('happiness',30)">
-                    <img src="./public/images/xương.png" alt="" width="28%">
-                    <span style="margin-top: 10px;">Xương:</span>
+                    <img src="./public/images/xương.png" alt="" width="35%">
                     <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
                 </button>
-                <button id="drink-mill" class="image-eat" onClick="onBuy('happiness',10)">
+                <!-- <button id="drink-mill" class="image-eat" onClick="onBuy('happiness',10)">
                     <img src="./public/images/mill.png" alt="" width="28%">
                     <span style="margin-top: 10px;">Sữa:</span>
                     <span style="width:60px;margin-top: 10px;">10<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button>
+                </button> -->
+
                 <button id="ball" class="image-eat" onClick="onBuy('happiness',30)">
-                    <img src="./public/images/banh.png" alt="" width="25%">
-                    <span style="margin-top: 10px;">Bóng:</span>
+                    <img src="./public/images/banh.png" alt="" width="35%">
                     <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
                 </button>
                 <button id="bear" class="image-eat" onClick="onBuy('happiness',10)">
-                    <img src="./public/images/gau.png" alt="" width="25%">
-                    <span style="margin-top: 10px;">Gấu:</span>
+                    <img src="./public/images/gau.png" alt="" width="35%">
                     <span style="width:60px;margin-top: 10px;">10<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
                 </button>
                 <button id="clear-body" class="image-eat" onClick="onBuy('hygienic',30)">
-                    <img src="./public/images/showerDog.png" alt="" width="25%">
-                    <span style="margin-top: 10px;">Vệ sinh:</span>
+                    <img src="./public/images/showerDog.png" alt="" width="35%" >
                     <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
                 </button>
+                
+                <!-- <div class="resource">
+                    <img src="public/images/golds.png" alt="" width="60px">
+                    <p id="coins">100</p>
+                </div> -->
             </div>
         </div>
         <div class="coinAnimation" onclick="pickUpCoin()">
             <img src="public/images/coin.gif" alt="" width="60px" class="coinpet" id="coin">
-        </div>
-        <div class="resource">
-            <img src="public/images/golds.png" alt="" width="60px">
-            <p id="coins">100</p>
         </div>
         <div class="pet">
             <img src="public/images/tam.gif" alt="" id="dogFeel">

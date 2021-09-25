@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
 @import url('https://fonts.googleapis.com/css?family=Black+Ops+One');
 html{
-    background-image: url("../images/bg-game.jpg");
+    /* background-image: url("../images/bg-game.jpg"); */
     width: 100%;
     height: 79vh;
     background-position: center;
@@ -18,7 +18,7 @@ body{
     width: 100%;
     height: 100%;
     z-index: 33333;
-    background-image: url("../images/bg-pet-start.png");
+    /* background-image: url("../images/bg-pet-start.png"); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -142,7 +142,7 @@ body{
     position: absolute;
     top: 5%;
     left: 1%;
-    width: 188px;
+    width: 160px;
     height: 300px;
     text-align: center;
     /* fill: rgba(255, 255, 255, 0.851); */
@@ -189,13 +189,14 @@ body{
     left: 51%;
     top: 86%;
     width: 8%;
+    cursor: pointer;
 }
 
 .petShop {
     position: absolute;
     top: 5%;
     right: 1%;
-    width: 200px;
+    width: 160px;
     height: 300px;
     /* fill: rgba(255, 255, 255, 0.851); */
     background: #FACE9C;
@@ -203,6 +204,7 @@ body{
 
 .table-eat {
     position: absolute;
+    padding-top: 10px;
 }
 
 .image-eat {
@@ -211,6 +213,7 @@ body{
     display: flex;
     position: relative;
     align-items: center;
+    justify-content: center;
 }
 .quantity{
     position: absolute;
@@ -238,6 +241,7 @@ body{
 .coinpet {
     animation: animaInfo 10s ease-in-out;
     z-index: 1;
+    cursor: pointer;
 }
 
 .resource {
@@ -247,11 +251,11 @@ body{
     display: flex;
 }
 
-#coins {
+/* #coins {
     border: 1px black solid;
     padding:4px;
     border-radius: 20px;
-}
+} */
 @keyframes animaInfo {
     0% {
         transform: translateY(0);
@@ -497,4 +501,7 @@ body{
     animation-timing-function:  linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+#dogFeel{
+    cursor: pointer;
 }
