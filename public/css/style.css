@@ -406,6 +406,11 @@ body{
     text-decoration: none !important;
     cursor: pointer;
 }
+
+.img-bold{
+    margin-bottom: 5px;
+}
+
 @-webkit-keyframes animacao2 { 
     from {-webkit-transform: scale(1);} 
     to {-webkit-transform: scale(1.2);} }
