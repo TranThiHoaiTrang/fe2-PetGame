@@ -41,6 +41,7 @@ function setCircleHungerProgress(hunger) {
     circleHungerProgress.style.strokeDasharray = `${circumference} ${circumference}`;
     circleHungerProgress.style.strokeDashoffset = `${circumference}`;
     const offset = circumference - hunger / 100 * circumference;
+    console.log('setCircleHungerProgress: ' + offset);
     circleHungerProgress.style.strokeDashoffset = offset;
 }
 function setCircleHappinessProgress(happiness) {
@@ -49,6 +50,7 @@ function setCircleHappinessProgress(happiness) {
     circleHappinessProgress.style.strokeDasharray = `${circumference} ${circumference}`;
     circleHappinessProgress.style.strokeDashoffset = `${circumference}`;
     const offset = circumference - happiness / 100 * circumference;
+    console.log('setCircleHappinessProgress: ' + offset);
     circleHappinessProgress.style.strokeDashoffset = offset
 
 }
@@ -58,6 +60,7 @@ function setCircleHygienicProgress(hygienic) {
     circleHygienicProgress.style.strokeDasharray = `${circumference} ${circumference}`;
     circleHygienicProgress.style.strokeDashoffset = `${circumference}`;
     const offset = circumference - hygienic / 100 * circumference;
+    console.log('setCircleHygienicProgress : ' + offset);
     circleHygienicProgress.style.strokeDashoffset = offset;
 }
 function setImageDog(hunger) {
@@ -277,6 +280,7 @@ noteGame.onclick = function () {
     noteGame.style.display = "none";
 }
 function continueGame() {
+    audio.pause();
     coins -= coins;
     setTimeout(() => {
         count = 0;
@@ -286,6 +290,7 @@ function continueGame() {
         coins = 100;
         countFree = 2;
     }, 100);
+    // audio.play();
     playAudioGame()
     onStart();
     setImageDog(hunger);
@@ -301,23 +306,28 @@ function blackGame() {
     hunger = 100;
     happiness = 100;
     audio.pause();
-    audio.src="";
+    audio.src = "";
     // audio.play();
 }
 let onStart = () => {
     setTimeout(() => {
         hygienic -= 3;
         hunger -= 6;
-        happiness = 10;
-    }, 2000);
+        happiness -= 10;
+    }, 5000);
     if (hygienic <= 0 || hunger <= 0 || happiness <= 0) {
+        audio.pause();
         gameOver.style.display = "block";
+        circleHygienicProgress.style.strokeDashoffset = 0;
+        circleHappinessProgress.style.strokeDashoffset = 0;
+        circleHungerProgress.style.strokeDashoffset = 0;
+    } else {
+        setCircleHungerProgress(hunger);
+        setCircleHappinessProgress(happiness);
+        setCircleHygienicProgress(hygienic);
+        setImageDog(hunger);
 
     }
-    setCircleHungerProgress(hunger);
-    setCircleHappinessProgress(happiness);
-    setCircleHygienicProgress(hygienic);
-    setImageDog(hunger);
 }
 window.onload = function () {
     gameOver.style.display = "none";
