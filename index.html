@@ -71,51 +71,57 @@
                     Vệ sinh
                 </div>
             </div>
-            <div class="level"></div>
+            <div class="progress-item">
+                <div class="lable">
+                    Level
+                </div>
+                <img class="start" src="./public/images/start.png" alt="">
+                <div class="number-start">01</div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
         </div>
         <div class="music-game">
             <button id="playpausebtn"></button>
             <button id="mutebtn" class="ml-2"></button>
         </div>
+        <div class="table-coin">
+            <button id="coins-button" class="table-coin-button" onClick="onBuy('hygienic',30)">
+                <span style="margin-top: 10px;" id="coins">100</span>
+                <img src="public/images/golds.png" alt="" width="35%">
+            </button>
+        </div>
         <div class="petShop">
             <div class="table-eat">
-                <button id="clear-body" class="image-eat" onClick="onBuy('hygienic',30)">
-                    <!-- <span style="margin-top: 10px;">Vệ sinh:</span> -->
-                    <span style="margin-top: 10px;" id="coins">100</span>
-                    <img src="public/images/golds.png" alt="" width="30%">
-                </button>
-                <button class="image-eat" onClick="onBuy('food',20)">
-                    <div class="quantity" id="countFree">2</div>
-                    <img src="./public/images/dodungtas-removebg.png" alt="" width="35%">
-                    <span style="width:60px;">20<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button>
-                <button id="eat-xuong" class="image-eat" onClick="onBuy('happiness',30)">
-                    <img src="./public/images/xương.png" alt="" width="35%">
-                    <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button>
-                <!-- <button id="drink-mill" class="image-eat" onClick="onBuy('happiness',10)">
-                    <img src="./public/images/mill.png" alt="" width="28%">
-                    <span style="margin-top: 10px;">Sữa:</span>
-                    <span style="width:60px;margin-top: 10px;">10<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button> -->
+                <div class="table-eat-top table-eat">
+                    <button class="image-eat" onClick="onBuy('food',20)">
+                        <div class="quantity" id="countFree">2</div>
+                        <img class="img-format" src="./public/images/dodungtas-removebg.png" alt="" width="65%">
+                        <span style="width:60px;">20<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
+                    </button>
+                    <button id="eat-xuong" class="image-eat" onClick="onBuy('happiness',30)">
+                        <img class="img-format" src="./public/images/xương.png" alt="" width="65%">
+                        <span style="width:60px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
+                    </button>
+                </div>
 
-                <button id="ball" class="image-eat" onClick="onBuy('happiness',30)">
-                    <img src="./public/images/banh.png" alt="" width="35%">
-                    <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button>
-                <button id="bear" class="image-eat" onClick="onBuy('happiness',10)">
-                    <img src="./public/images/gau.png" alt="" width="35%">
-                    <span style="width:60px;margin-top: 10px;">10<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button>
-                <button id="clear-body" class="image-eat" onClick="onBuy('hygienic',30)">
-                    <img src="./public/images/showerDog.png" alt="" width="35%" >
-                    <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
-                </button>
-                
-                <!-- <div class="resource">
-                    <img src="public/images/golds.png" alt="" width="60px">
-                    <p id="coins">100</p>
-                </div> -->
+                <div class="table-eat-center table-eat">
+                    <button id="ball" class="image-eat" onClick="onBuy('happiness',30)">
+                        <img class="img-format" src="./public/images/banh.png" alt="" width="55%">
+                        <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
+                    </button>
+                    <button id="bear" class="image-eat" onClick="onBuy('happiness',10)">
+                        <img class="img-format" src="./public/images/gau.png" alt="" width="65%">
+                        <span style="width:60px;margin-top: 10px;">10<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
+                    </button>
+                </div>
+                <div class="table-eat-bottom table-eat">
+                    <button id="clear-body" class="image-eat" onClick="onBuy('hygienic',30)">
+                        <img class="img-format" src="./public/images/showerDog.png" alt="" width="75%" >
+                        <span style="width:60px;margin-top: 10px;">30<img src="./public/images/vang-bg.png" alt="" class="img-bold" width="28%"></span>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="coinAnimation" onclick="pickUpCoin()">
