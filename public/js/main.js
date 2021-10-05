@@ -37,30 +37,34 @@ setInterval(() => {
 }, 10000);
 function setCircleHungerProgress(hunger) {
     var radius = circleHungerProgress.r.baseVal.value;
+    // Áp dụng công thức diện tích hình tròn : S =r*2.PI để tính 
     var circumference = radius * 2 * Math.PI;
     circleHungerProgress.style.strokeDasharray = `${circumference} ${circumference}`;
     circleHungerProgress.style.strokeDashoffset = `${circumference}`;
-    const offset = circumference - hunger / 100 * circumference;
-    console.log('setCircleHungerProgress: ' + offset);
+    const offset = circumference -( hunger / 100 )* circumference;
     circleHungerProgress.style.strokeDashoffset = offset;
+    // console.log(hunger);
+    // const circumference = circleHungerProgress.getTotalLength();
+    // circleHungerProgress.style.strokeDashoffset = circumference - (hunger/100) * circumference;
+    
 }
 function setCircleHappinessProgress(happiness) {
     var radius = circleHappinessProgress.r.baseVal.value;
+    // Áp dụng công thức diện tích hình tròn : S =r*2.PI để tính 
     var circumference = radius * 2 * Math.PI;
     circleHappinessProgress.style.strokeDasharray = `${circumference} ${circumference}`;
     circleHappinessProgress.style.strokeDashoffset = `${circumference}`;
-    const offset = circumference - happiness / 100 * circumference;
-    console.log('setCircleHappinessProgress: ' + offset);
+    const offset = circumference - (happiness / 100) * circumference;
     circleHappinessProgress.style.strokeDashoffset = offset
 
 }
 function setCircleHygienicProgress(hygienic) {
     var radius = circleHygienicProgress.r.baseVal.value;
+    // Áp dụng công thức diện tích hình tròn : S =r*2.PI để tính 
     var circumference = radius * 2 * Math.PI;
     circleHygienicProgress.style.strokeDasharray = `${circumference} ${circumference}`;
     circleHygienicProgress.style.strokeDashoffset = `${circumference}`;
-    const offset = circumference - hygienic / 100 * circumference;
-    console.log('setCircleHygienicProgress : ' + offset);
+    const offset = circumference - (hygienic / 100) * circumference;
     circleHygienicProgress.style.strokeDashoffset = offset;
 }
 function setImageDog(hunger) {

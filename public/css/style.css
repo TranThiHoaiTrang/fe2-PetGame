@@ -184,9 +184,8 @@ body {
 }
 
 .progress-ring__circle {
-    transition: 0.35s stroke-dashoffset;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
+    stroke-dasharray: 189;
+    stroke-dashoffset: 189;
 }
 
 .progress-ring {
